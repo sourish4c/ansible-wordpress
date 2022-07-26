@@ -19,7 +19,7 @@ Quickstart guide for those already familiar with Ansible:
 
 ### 1. Obtain the playbook
 ```shell
-git clone https://
+git clone https://github.com/sourish4c/ansible-wordpress
 cd ansible-wordpress
 ```
 
