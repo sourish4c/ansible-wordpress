@@ -103,7 +103,7 @@
         state: import
         login_user: root
         login_password: "{{ mysql_root_password }}"
-        target: ./wordpress.sql
+        target: "files/wordpress.sql"
       tags: [ mysql ]
 
   # UFW Configuration
