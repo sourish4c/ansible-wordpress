@@ -106,6 +106,18 @@
         target: "files/wordpress.sql"
       tags: [ mysql ]
 
+    - name: Run several update queries against db wordpress
+      community.mysql.mysql_query:
+        login_db: "{{ mysql_db }}"
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        query:
+        - UPDATE wp_options SET option_value = replace(option_value, 'http://localhost', 'http://{{ http_host }}') WHERE option_name = 'home' OR option_name = 'siteurl'
+        - UPDATE wp_posts SET guid = replace(guid, 'http://localhost', 'http://{{ http_host }}')
+        - UPDATE wp_posts SET post_content = replace(post_content, 'http://localhost', 'http://{{ http_host }}')
+        - UPDATE wp_postmeta SET meta_value = replace(meta_value,'http://localhost', 'http://{{ http_host }}')
+        single_transaction: yes
+
   # UFW Configuration
     - name: "UFW - Allow HTTP on port {{ http_port }}"
       ufw:
